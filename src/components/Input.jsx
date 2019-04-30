@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import Input from '@material-ui/core/Input';
+import CitiesList from "./Widget/CitiesList";
+import Add from "./Buttons/Add";
 
 const styles = theme => ({
   cssLabel: {
@@ -22,33 +23,43 @@ const styles = theme => ({
     }
   },
   notchedOutline: {},
+  elementsInput:{
+    maxWidth: 200,
+    margin: "auto",
+    maxWidth: 300
+  }
 });
 
 const Search = props => {
   const { classes } = props;
 
   return (
-    <TextField
-      id="standard-name"
-      label="Wpisz miasto"
-      className={classes.textField}
-      value={props.value}
-      onChange={props.change}
-      margin="normal"
-      InputLabelProps={{
-        classes: {
-          root: classes.cssLabel,
-          focused: classes.cssFocused
-        }
-      }}
-      InputProps={{
-        classes: {
-          root: classes.cssOutlinedInput,
-          focused: classes.cssFocused,
-          notchedOutline: classes.notchedOutline
-        }
-      }}
-    />
+    <div className={classes.elementsInput}>
+      <TextField
+        id="standard-name"
+        label="Wpisz miasto"
+        autoComplete="off"
+        className={classes.textField}
+        value={props.value}
+        onChange={props.change}
+        margin="normal"
+        InputLabelProps={{
+          classes: {
+            root: classes.cssLabel,
+            focused: classes.cssFocused
+          }
+        }}
+        InputProps={{
+          classes: {
+            root: classes.cssOutlinedInput,
+            focused: classes.cssFocused
+            //   notchedOutline: classes.notchedOutline
+          }
+        }}
+      />
+      <Add addCity={props.addCity}/>
+      {props.cities.length > 0 && props.selected? <CitiesList cities={props.cities} handleSetInputValue={props.handleSetInputValue}/>: false}
+    </div>
   );
 };
 Search.propTypes = {

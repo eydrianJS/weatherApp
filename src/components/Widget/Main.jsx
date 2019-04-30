@@ -4,12 +4,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Cached from "@material-ui/icons/Cached";
-import DeleteForever from "@material-ui/icons/DeleteForever";
 import WbSunny from "@material-ui/icons/WbSunny";
 // import CloudQueue from "@material-ui/icons/CloudQueue";
+import Delete from './Buttons/Delete'
+import Upadte from './Buttons/Update'
 
 const styles = {
   card: {
@@ -34,15 +33,6 @@ const styles = {
     minHeight: 100,
     backgroundColor: "#e1e1f6"
   },
-  icon: {
-    float:"left",
-    margin: 5
-  },
-  button: {
-    margin: 0,
-    padding: 0,
-    minWidth: "0px"
-  },
   city: {
     float: "left",
     fontSize: "10px",
@@ -60,12 +50,8 @@ function Main(props) {
           {`Temp ${props.data.cloudPercentage} °`}
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Button size="small" className={classes.button}>
-            <Cached className={classes.icon} />
-          </Button>
-          <Button size="small" className={classes.button}>
-            <DeleteForever className={classes.icon} />
-          </Button>
+          <Upadte/>
+          <Delete deleteCity={props.deleteCity} id={props.data.id}/>
         </CardActions>
       </CardContent>
       <CardContent className={classes.city} >

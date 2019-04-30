@@ -1,33 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Main from "./components/Main";
 
 const APP = () => {
-  const [data, setData] = useState([
-    {
-      id: 763534,
-      name: "Nowy Sacz",
-      cloudPercentage: 93,
-      rainAmount: 0.8,
-      temperature: 20.6
-    },
-    {
-      id: 770293,
-      name: "Jaslo",
-      cloudPercentage: 1,
-      rainAmount: 0,
-      temperature: 15.2
-    }
-  ]);
+
+  const [data, setData] = useState( () =>  JSON.parse(window.localStorage.getItem('data')) || []);
   const [inputValue, setInputValue] = useState("");
   const [cityList, setCityList] = useState([]);
   const API = "http://127.0.0.1:5263";
+  const [selected, setSelected] = useState(false)
 
+  useEffect( ()=> {
+    window.localStorage.setItem('data', JSON.stringify(data));
+  })
 
   const handleChangeInput = e => {
     const value = e.target.value;
     setInputValue(value);
     getCitiesList(value);
+    setSelected(true);
   };
 
   const getCitiesList = value => {
@@ -63,9 +54,8 @@ const APP = () => {
 
   const addCity = () => {
     const cityName = inputValue
-    const city = cityList.find(item => item.name.toLowerCase() == cityName.toLowerCase())
-
-    if(!city) return console.log("nie ma ");
+    const city = cityList.find(item => item.name.toLowerCase() === cityName.toLowerCase())
+    if(!city || data.filter(item => item.id === city.id).length) return console.log("nie ma ");
 
     let h = new Headers();
     h.append(
@@ -87,15 +77,29 @@ const APP = () => {
       })
       .then(response => response.json())
       .then(cityData => {
-        console.log(cityData);
-        let newCityData = Object.assign({id: city.id, name: cityName},cityData)
+        let newCityData = Object.assign({id: city.id, name: city.name},cityData)
         newCityData = [...data].concat(newCityData)
         setData(newCityData);
+        setInputValue("");
+        setCityList("");
       })
       .catch(err => {
         console.log(err);
       });
   };
+
+  const deleteCity = (id) => {
+    let cities = [...data]
+    console.log(id);
+    cities = cities.filter(item => item.id !== id)
+    setData(cities);
+  }
+
+  const handleSetInputValue = (id) => {    
+    const city = cityList.filter(item => item.id === id)
+    setInputValue(city[0].name)
+    setSelected(false);
+  }
 
   return (
     <div className="App">
@@ -105,6 +109,9 @@ const APP = () => {
         value={inputValue}
         cities={cityList}
         addCity={addCity}
+        handleSetInputValue={(id) => handleSetInputValue(id)}
+        selected={selected}
+        deleteCity={(id) => deleteCity(id)}
       />
     </div>
   );

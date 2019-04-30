@@ -17,8 +17,8 @@ const styles = theme => ({
 const Add = props => {
   const { classes } = props;
   return (
-    <Fab aria-label="Add" className={classes.fab}>
-      <AddIcon onClick={props.addCity} />
+    <Fab aria-label="Add" className={classes.fab} onClick={props.addCity}>
+      <AddIcon />
     </Fab>
   );
 };
