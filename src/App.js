@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Main from "./components/Main";
 
@@ -23,9 +23,6 @@ const APP = () => {
   const [cityList, setCityList] = useState([]);
   const API = "http://127.0.0.1:5263";
 
-  useEffect(() => {
-    console.log(cityList);
-  });
 
   const handleChangeInput = e => {
     const value = e.target.value;
