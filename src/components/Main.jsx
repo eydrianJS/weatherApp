@@ -7,7 +7,7 @@ const Main = props => {
   return (
     <div>
       <Input change={props.change} value={props.value} />
-      <Add />
+      <Add addCity={props.addCity}/>
       {props.data.map(item => (
         <Widget key={item.id} data={item} />
       ))}
