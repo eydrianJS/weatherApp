@@ -3,17 +3,23 @@ import { getCities, getCity } from "../services/weatherApi";
 export const actions = {
   SET_CITIES: "SET_CITIES",
   ADD_CITY: "ADD_CITY",
-  DELETE_CITY: "DELETE_CITY" ,
-  UPDATE_CITY: "UPDATE_CITY" ,
+  DELETE_CITY: "DELETE_CITY",
+  UPDATE_CITY: "UPDATE_CITY",
   SET_SELECTED_CITIES: "SET_SELECTED_CITIES",
   SET_ERROR: "SET_ERROR"
 };
 
 export const getCitiesList = () => {
   return disptach => {
-    return getCities().then(cities => {
-      disptach(setCities(cities));
-    });
+    return getCities()
+      .then(cities => {
+        if (cities) {
+          disptach(setCities(cities));
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => disptach(setError(true)));
   };
 };
 
@@ -24,9 +30,15 @@ const setCities = cities => ({
 
 export const addCity = city => {
   return disptach => {
-    return getCity(city.id).then(response => {
-      disptach(addCitySuccess({...city, ...response}));
-    });
+    return getCity(city.id)
+      .then(response => {
+        if (response) {
+          disptach(addCitySuccess({ ...city, ...response }));
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => disptach(setError(true)));
   };
 };
 
@@ -42,9 +54,15 @@ export const deleteCity = cityId => ({
 
 export const updateCity = city => {
   return disptach => {
-    return getCity(city.id).then(response => {
-      disptach(updateCitySuccess({...city, ...response}));
-    });
+    return getCity(city.id)
+      .then(response => {
+        if (response) {
+          disptach(updateCitySuccess({ ...city, ...response }));
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => disptach(setError(true)));
   };
 };
 

@@ -11,7 +11,7 @@ const  sendApiRequest = async (url) => {
     const response = await fetch(url, config);
     return response.json();
   } catch (error) {
-    console.error(error);
+    console.log(error)
   }
 }
 
