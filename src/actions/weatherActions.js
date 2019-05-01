@@ -1,4 +1,4 @@
-import { getCities, getCity } from "../services/api";
+import { getCities, getCity } from "../services/weatherApi";
 
 export const actions = {
   SET_CITIES: "SET_CITIES",
