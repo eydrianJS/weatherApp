@@ -28,7 +28,6 @@ const Search = props => {
           classes: {
             root: classes.cssOutlinedInput,
             focused: classes.cssFocused
-            //   notchedOutline: classes.notchedOutline
           }
         }}
       />
