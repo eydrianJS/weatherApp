@@ -11,7 +11,6 @@ export const actions = {
 export const getCitiesList = () => {
   return disptach => {
     return getCities().then(cities => {
-      console.log("cities", cities);
       disptach(setCities(cities));
     });
   };
@@ -43,8 +42,6 @@ export const deleteCity = cityId => ({
 export const updateCity = city => {
   return disptach => {
     return getCity(city.id).then(response => {
-      console.log("update")
-      console.log({...city, ...response})
       disptach(updateCitySuccess({...city, ...response}));
     });
   };
