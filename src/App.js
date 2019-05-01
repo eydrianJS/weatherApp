@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import Input from "./components/Input";
 import Widget from "./components/Widget/Main";
 import Grid from "@material-ui/core/Grid";
+import { useCitiesLocalStorage } from "./effects/LocalStorageEffects";
 
 import {
   getCitiesList,
@@ -18,28 +19,7 @@ const APP = props => {
   const [filteredCities, setCityList] = useState([]);
   const [selected, setSelected] = useState(false);
 
-  useEffect(() => {
-    if (!props.selectedCities.length) return;
-    window.localStorage.setItem(
-      "selectedCities",
-      JSON.stringify(props.selectedCities)
-    );
-  });
-
-  useEffect(() => {
-    let selectedCities = [];
-    const citiesFromLocalStorage = window.localStorage.getItem(
-      "selectedCities"
-    );
-    if (citiesFromLocalStorage) {
-      selectedCities = JSON.parse(citiesFromLocalStorage);
-    }
-    props.setSelectedCities(selectedCities);
-  }, []);
-
-  useEffect(() => {
-    props.getCitiesList();
-  }, []);
+  useCitiesLocalStorage(props)
 
   const handleChangeInput = e => {
     const value = e.target.value;
@@ -66,12 +46,10 @@ const APP = props => {
     setCityList("");
   };
 
-  const updateCity = async (id) => {
-    const city = props.selectedCities.find(
-      city => city.id === id
-    );
-    props.updateCity(city)
-  }
+  const updateCity = async id => {
+    const city = props.selectedCities.find(city => city.id === id);
+    props.updateCity(city);
+  };
 
   const handleSetInputValue = id => {
     const city = filteredCities.filter(item => item.id === id);
