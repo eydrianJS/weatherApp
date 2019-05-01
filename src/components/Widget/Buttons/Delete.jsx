@@ -11,14 +11,18 @@ const styles = {
     minWidth: "0px"
   },
   icon: {
-    float:"left",
+    float: "left",
     margin: 5
-  },
+  }
 };
-const Delete = (props) => {
-    const { classes } = props;
+const Delete = props => {
+  const { classes } = props;
   return (
-    <Button size="small" className={classes.button} onClick={(id)=> props.deleteCity(props.id)}>
+    <Button
+      size="small"
+      className={classes.button}
+      onClick={id => props.deleteCity(props.id)}
+    >
       <DeleteForever className={classes.icon} />
     </Button>
   );

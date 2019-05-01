@@ -24,7 +24,6 @@ const styles = theme => ({
   },
   notchedOutline: {},
   elementsInput:{
-    maxWidth: 200,
     margin: "auto",
     maxWidth: 300
   }
