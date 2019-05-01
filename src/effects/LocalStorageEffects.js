@@ -3,7 +3,6 @@ import { useEffect } from "react";
 export const useCitiesLocalStorage = props => {
   useEffect(() => {
     props.getCitiesList();
-    console.log("lista")
   }, []);
 
   useEffect(() => {

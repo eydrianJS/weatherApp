@@ -1,6 +1,6 @@
 export const styles = {
   card: {
-    minWidth: 200,
+    width: 255,
     margin: 20,
     padding: 0
   },
