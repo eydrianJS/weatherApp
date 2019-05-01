@@ -5,7 +5,8 @@ export const actions = {
   ADD_CITY: "ADD_CITY",
   DELETE_CITY: "DELETE_CITY" ,
   UPDATE_CITY: "UPDATE_CITY" ,
-  SET_SELECTED_CITIES: "SET_SELECTED_CITIES"
+  SET_SELECTED_CITIES: "SET_SELECTED_CITIES",
+  SET_ERROR: "SET_ERROR"
 };
 
 export const getCitiesList = () => {
@@ -55,4 +56,9 @@ const updateCitySuccess = city => ({
 export const setSelectedCities = selectedCities => ({
   type: actions.SET_SELECTED_CITIES,
   selectedCities
+});
+
+export const setError = error => ({
+  type: actions.SET_ERROR,
+  error
 });

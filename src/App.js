@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Input from "./components/Input";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Widget from "./components/Widget/Main";
 import Grid from "@material-ui/core/Grid";
 import { useCitiesLocalStorage } from "./effects/LocalStorageEffects";
@@ -10,7 +11,8 @@ import {
   addCity,
   deleteCity,
   setSelectedCities,
-  updateCity
+  updateCity,
+  setError
 } from "./actions/weatherActions";
 
 const APP = props => {
@@ -30,9 +32,13 @@ const APP = props => {
 
   const filterCities = value => {
     setInputError("");
-    return props.cities.filter(city =>
-      city.name.toLowerCase().startsWith(value.toLowerCase())
-    );
+    try {
+      return props.cities.filter(city =>
+        city.name.toLowerCase().startsWith(value.toLowerCase())
+      );
+    } catch (err){
+      props.setError(err)
+    }
   };
 
   const addCity = async () => {
@@ -60,33 +66,36 @@ const APP = props => {
 
   return (
     <div className="App">
-      <Input
-        change={e => handleChangeInput(e)}
-        value={cityName}
-        cities={filteredCities}
-        addCity={addCity}
-        handleSetInputValue={id => handleSetInputValue(id)}
-        selected={selected}
-        error={inputError}
-        focusOut={() => setTimeout( ()=>setSelected(false),150)}
-      />
-      <Grid container spacing={8}>
-        {props.selectedCities.map(item => (
-          <Widget
-            key={item.id}
-            data={item}
-            deleteCity={id => props.deleteCity(id)}
-            updateCity={id => updateCity(id)}
-          />
-        ))}
-      </Grid>
+      {props.error? <ErrorBoundary />: <><Input
+      change={e => handleChangeInput(e)}
+      value={cityName}
+      cities={filteredCities}
+      addCity={addCity}
+      handleSetInputValue={id => handleSetInputValue(id)}
+      selected={selected}
+      error={inputError}
+      focusOut={() => setTimeout( ()=>setSelected(false),150)}
+    />
+    <Grid container spacing={8}>
+      {props.selectedCities.map(item => (
+        <Widget
+          key={item.id}
+          data={item}
+          deleteCity={id => props.deleteCity(id)}
+          updateCity={id => updateCity(id)}
+        />
+      ))}
+    </Grid></>
+    }
+      
     </div>
   );
 };
 
 const mapStateToProps = state => ({
   cities: state.cities,
-  selectedCities: state.selectedCities
+  selectedCities: state.selectedCities,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -94,6 +103,7 @@ const mapDispatchToProps = dispatch => ({
   addCity: city => dispatch(addCity(city)),
   deleteCity: cityId => dispatch(deleteCity(cityId)),
   updateCity: city => dispatch(updateCity(city)),
+  setError: error => dispatch(setError(error)),
   setSelectedCities: selectedCities =>
     dispatch(setSelectedCities(selectedCities))
 });

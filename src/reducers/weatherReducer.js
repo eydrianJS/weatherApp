@@ -42,6 +42,12 @@ export default function weatherReducer(state = initialState, action) {
         })
       };
 
+    case actions.SET_ERROR:
+      return {
+        ...state,
+        error: action.error
+      };
+
     default:
       return state;
   }
