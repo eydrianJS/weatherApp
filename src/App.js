@@ -18,7 +18,7 @@ const APP = props => {
   const [filteredCities, setCityList] = useState([]);
   const [selected, setSelected] = useState(false);
 
-  useCitiesLocalStorage(props)
+  useCitiesLocalStorage(props);
 
   const handleChangeInput = e => {
     const value = e.target.value;

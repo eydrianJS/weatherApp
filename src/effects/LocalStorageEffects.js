@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const useCitiesLocalStorage = props => {
   useEffect(() => {
@@ -22,4 +22,17 @@ export const useCitiesLocalStorage = props => {
       JSON.stringify(props.selectedCities)
     );
   }, [props.selectedCities]);
+
+  const intervalRef = useRef();
+  useEffect(() => {
+    const id = setInterval(() => {
+      props.selectedCities.map(city => {
+        props.updateCity(city);
+      })
+    }, 60000);
+    intervalRef.current = id;
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  });
 };
