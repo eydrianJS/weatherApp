@@ -2,6 +2,11 @@ import { useEffect } from "react";
 
 export const useCitiesLocalStorage = props => {
   useEffect(() => {
+    props.getCitiesList();
+    console.log("lista")
+  }, []);
+
+  useEffect(() => {
     let selectedCities = [];
     const citiesFromLocalStorage = window.localStorage.getItem(
       "selectedCities"
@@ -18,8 +23,4 @@ export const useCitiesLocalStorage = props => {
       JSON.stringify(props.selectedCities)
     );
   }, [props.selectedCities]);
-
-  useEffect(() => {
-    props.getCitiesList();
-  }, []);
 };

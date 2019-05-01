@@ -17,10 +17,10 @@ const  sendApiRequest = async (url) => {
 
 export async function getCities() {
   const url = `${API}/api/city-list`;
-  await sendApiRequest(url)
+  return sendApiRequest(url)
 }
 
 export async function getCity(cityId) {
   const url = `${API}/api/weather/${cityId}`;
-  await sendApiRequest(url)
+  return sendApiRequest(url)
 }
