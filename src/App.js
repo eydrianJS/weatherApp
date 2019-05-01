@@ -51,6 +51,7 @@ const APP = props => {
     props.addCity(city);
     setCityName("");
     setCityList("");
+    setInputError("");
   };
 
   const updateCity = async id => {
