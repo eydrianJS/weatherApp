@@ -17,6 +17,7 @@ const APP = props => {
   const [cityName, setCityName] = useState("");
   const [filteredCities, setCityList] = useState([]);
   const [selected, setSelected] = useState(false);
+  const [inputError, setInputError] = useState("");
 
   useCitiesLocalStorage(props);
 
@@ -28,6 +29,7 @@ const APP = props => {
   };
 
   const filterCities = value => {
+    setInputError("");
     return props.cities.filter(city =>
       city.name.toLowerCase().startsWith(value.toLowerCase())
     );
@@ -37,9 +39,9 @@ const APP = props => {
     const city = filteredCities.find(
       item => item.name.toLowerCase() === cityName.toLowerCase()
     );
-    if (!city) return console.log("nie ma ");
+    if (!city) return setInputError(`${cityName} nie ma na liście dostępnych miast`);
     if (props.selectedCities.filter(item => item.id === city.id).length)
-      return console.log("juz jest");
+      return setInputError(`${cityName} już się znajduje na Twojej liście`);
     props.addCity(city);
     setCityName("");
     setCityList("");
@@ -65,6 +67,8 @@ const APP = props => {
         addCity={addCity}
         handleSetInputValue={id => handleSetInputValue(id)}
         selected={selected}
+        error={inputError}
+        focusOut={() => setTimeout( ()=>setSelected(false),150)}
       />
       <Grid container spacing={8}>
         {props.selectedCities.map(item => (
