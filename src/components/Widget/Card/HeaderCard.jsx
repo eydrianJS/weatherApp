@@ -7,26 +7,9 @@ import WbSunny from "@material-ui/icons/WbSunny";
 import CloudQueue from "@material-ui/icons/CloudQueue";
 import Delete from '../Buttons/Delete'
 import Upadte from '../Buttons/Update'
+import { styles } from './HeaderCardStyles'
 
-const styles = {
-    cardActions: {
-      float: "right",
-      margin: 5,
-      padding: 5,
-      display: "unset"
-    },
-    temperatureZone: {
-      margin: 0,
-      padding: 0,
-      float: "left",
-    },
-    headerZone: {
-      margin: 0,
-      padding: 0,
-      minHeight: 100,
-      backgroundColor: "#e1e1f6"
-    },
-  };
+
 
 const HeaderCard = (props) => {
   const { classes } = props;
@@ -38,7 +21,7 @@ const HeaderCard = (props) => {
         {`Temp ${props.data.temperature} °`}
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Upadte />
+        <Upadte updateCity={props.updateCity} id={props.data.id}/>
         <Delete deleteCity={props.deleteCity} id={props.data.id} />
       </CardActions>
     </CardContent>

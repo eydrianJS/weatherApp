@@ -1,9 +1,10 @@
-import { getCities, getCity } from "../api";
+import { getCities, getCity } from "../services/api";
 
 export const actions = {
   SET_CITIES: "SET_CITIES",
   ADD_CITY: "ADD_CITY",
   DELETE_CITY: "DELETE_CITY" ,
+  UPDATE_CITY: "UPDATE_CITY" ,
   SET_SELECTED_CITIES: "SET_SELECTED_CITIES"
 };
 
@@ -37,6 +38,21 @@ const addCitySuccess = city => ({
 export const deleteCity = cityId => ({
   type: actions.DELETE_CITY,
   cityId
+});
+
+export const updateCity = city => {
+  return disptach => {
+    return getCity(city.id).then(response => {
+      console.log("update")
+      console.log({...city, ...response})
+      disptach(updateCitySuccess({...city, ...response}));
+    });
+  };
+};
+
+const updateCitySuccess = city => ({
+  type: actions.UPDATE_CITY,
+  city
 });
 
 export const setSelectedCities = selectedCities => ({

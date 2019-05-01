@@ -19,7 +19,7 @@ const styles = {
 const Upadte = (props) => {
   const { classes } = props;
   return (
-    <Button size="small" className={classes.button}>
+    <Button size="small" className={classes.button} onClick={id => props.updateCity(props.id)}>
       <Cached className={classes.icon} />
     </Button>
   );

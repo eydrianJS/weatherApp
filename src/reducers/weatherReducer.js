@@ -30,6 +30,17 @@ export default function weatherReducer(state = initialState, action) {
         ...state,
         selectedCities: action.selectedCities
       };
+    
+    case actions.UPDATE_CITY:
+      return {
+        ...state,
+        selectedCities: state.selectedCities.map(city => {
+          if(city.id === action.city.id) {
+            return action.city
+          }
+          return city;
+        })
+      };
 
     default:
       return state;

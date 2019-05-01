@@ -24,7 +24,7 @@ function Main(props) {
   const { classes } = props;
   return (
     <Card className={classes.card}>
-      <HeaderCard data={props.data} deleteCity={props.deleteCity}  />
+      <HeaderCard data={props.data} deleteCity={props.deleteCity}  updateCity={props.updateCity}/>
       <CardContent className={classes.city} >
           <Typography gutterBottom variant="h6" component="h6">
             {props.data.name}

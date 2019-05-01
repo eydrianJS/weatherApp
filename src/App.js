@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import Main from "./components/Main";
+import Input from "./components/Input";
+import Widget from "./components/Widget/Main";
+import Grid from "@material-ui/core/Grid";
 
 import {
   getCitiesList,
   addCity,
   deleteCity,
-  setSelectedCities
+  setSelectedCities,
+  updateCity
 } from "./actions/weatherActions";
 
 const APP = props => {
@@ -63,6 +66,13 @@ const APP = props => {
     setCityList("");
   };
 
+  const updateCity = async (id) => {
+    const city = props.selectedCities.find(
+      city => city.id === id
+    );
+    props.updateCity(city)
+  }
+
   const handleSetInputValue = id => {
     const city = filteredCities.filter(item => item.id === id);
     setCityName(city[0].name);
@@ -71,16 +81,24 @@ const APP = props => {
 
   return (
     <div className="App">
-      <Main
-        data={props.selectedCities}
+      <Input
         change={e => handleChangeInput(e)}
         value={cityName}
         cities={filteredCities}
         addCity={addCity}
         handleSetInputValue={id => handleSetInputValue(id)}
         selected={selected}
-        deleteCity={id => props.deleteCity(id)}
       />
+      <Grid container spacing={8}>
+        {props.selectedCities.map(item => (
+          <Widget
+            key={item.id}
+            data={item}
+            deleteCity={id => props.deleteCity(id)}
+            updateCity={id => updateCity(id)}
+          />
+        ))}
+      </Grid>
     </div>
   );
 };
@@ -92,8 +110,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCitiesList: () => dispatch(getCitiesList()),
-  addCity: cityId => dispatch(addCity(cityId)),
+  addCity: city => dispatch(addCity(city)),
   deleteCity: cityId => dispatch(deleteCity(cityId)),
+  updateCity: city => dispatch(updateCity(city)),
   setSelectedCities: selectedCities =>
     dispatch(setSelectedCities(selectedCities))
 });
