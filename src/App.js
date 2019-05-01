@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import "./App.css";
 import Input from "./components/Input";
 import Widget from "./components/Widget/Main";
 import Grid from "@material-ui/core/Grid";

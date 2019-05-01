@@ -1,5 +1,6 @@
 export const styles = {
     cardActions: {
+      width: 180,
       float: "right",
       margin: 5,
       padding: 5,

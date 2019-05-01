@@ -1,20 +1,8 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Cached from "@material-ui/icons/Cached";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-
-const styles = {
-  button: {
-    margin: 0,
-    padding: 0,
-    minWidth: "0px"
-  },
-  icon: {
-    float: "left",
-    margin: 5
-  }
-};
+import Cached from "@material-ui/icons/Cached";
+import { withStyles, Button } from "@material-ui/core";
+import { styles } from "../../Styles/UpdateStyles"
 
 const Upadte = (props) => {
   const { classes } = props;

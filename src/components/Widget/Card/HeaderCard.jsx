@@ -1,14 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import WbSunny from "@material-ui/icons/WbSunny";
-import CloudQueue from "@material-ui/icons/CloudQueue";
+import PropTypes from "prop-types"
 import Delete from '../Buttons/Delete'
 import Upadte from '../Buttons/Update'
-import { styles } from './HeaderCardStyles'
-
+import { withStyles, CardContent, CardActions } from "@material-ui/core"
+import {WbSunny, CloudQueue } from "@material-ui/icons"
+import { styles } from '../../Styles/HeaderCardStyles'
 
 
 const HeaderCard = (props) => {

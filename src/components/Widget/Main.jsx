@@ -1,24 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-
 import HeaderCard from './Card/HeaderCard'
-
-const styles = {
-  card: {
-    minWidth: 200,
-    margin: 20,
-    padding: 0,
-  },
-  city: {
-    float: "left",
-    fontSize: "10px",
-    height: "20px"
-  }
-};
+import { withStyles, Card, CardContent , Typography} from "@material-ui/core";
+import { styles } from '../Styles/MainWidgetStyles'
 
 function Main(props) {
   const { classes } = props;

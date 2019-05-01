@@ -1,20 +1,9 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import DeleteForever from "@material-ui/icons/DeleteForever";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types"
+import DeleteForever from "@material-ui/icons/DeleteForever"
+import { withStyles, Button } from "@material-ui/core";
+import { styles } from "../../Styles/DeleteStyles"
 
-const styles = {
-  button: {
-    margin: 0,
-    padding: 0,
-    minWidth: "0px"
-  },
-  icon: {
-    float: "left",
-    margin: 5
-  }
-};
 const Delete = props => {
   const { classes } = props;
   return (

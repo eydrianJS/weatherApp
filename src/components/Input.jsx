@@ -1,33 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import CitiesList from "./Widget/CitiesList";
 import Add from "./Buttons/Add";
-
-const styles = theme => ({
-  cssLabel: {
-    "&$cssFocused": {
-      color: "#ff9f3f"
-    }
-  },
-  cssFocused: {},
-  cssUnderline: {
-    "&:after": {
-      borderBottomColor: "#ff9f3f"
-    }
-  },
-  cssOutlinedInput: {
-    "&$cssFocused $notchedOutline": {
-      borderColor: "#ff9f3f"
-    }
-  },
-  notchedOutline: {},
-  elementsInput:{
-    margin: "auto",
-    maxWidth: 300
-  }
-});
+import { withStyles, TextField } from "@material-ui/core";
+import { styles } from "./Styles/InputStyles"
 
 const Search = props => {
   const { classes } = props;

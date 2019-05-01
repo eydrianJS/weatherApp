@@ -1,18 +1,8 @@
 import React from "react";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-
-const styles = theme => ({
-  fab: {
-    margin: theme.spacing.unit,
-    backgroundColor: "#ff9f3f"
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit
-  }
-});
+import AddIcon from "@material-ui/icons/Add";
+import { withStyles, Fab } from "@material-ui/core";
+import { styles } from "../Styles/AddStyles"
 
 const Add = props => {
   const { classes } = props;
